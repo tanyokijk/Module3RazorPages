@@ -1,0 +1,90 @@
+﻿@page "/"
+@model Module3RazorPages.Pages.MoviesModel
+
+<div class="gallery">
+    @foreach (var movie in Model.Movies)
+    {
+        <div class="movie-card">
+            <a href="Details/@movie.Id"><img src="@movie.Photo" alt="@movie.Name" class="movie-poster" /></a>
+            <div class="movie-details">
+                <a href="Details/@movie.Id"><h2>@movie.Name</h2></a>
+                <h4>Сеанси:</h4>
+
+                    @foreach (var session in movie.Sessions)
+                    {
+                        <div class="session-details"><p>@session.DateTime.ToString("HH:mm")</p><p>Зал @session.RoomNumber</p></div>
+                    }
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    body
+    {
+        background-color: #3E3232;
+    }
+
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin-left: 80px;
+    }
+
+
+    .session-details {
+        background-color: #7E6363;
+        border-radius: 10px;
+        list-style-type: none;
+        padding: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+        display: inline-block;
+        width: 40px;
+        height: 30px;
+        line-height: 15px;
+    }
+
+    .movie-card {
+        border: none;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+        width: 200px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+
+
+    .movie-details {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .movie-poster {
+        width: 100%;
+        height: auto;
+    }
+
+    .session-details p {
+        margin: 0;
+    }
+
+
+h2,h4,p
+{
+color : whitesmoke
+}
+
+    a {
+        text-decoration: none;
+        color: whitesmoke;
+    }
+
+    .movie-details h2:hover {
+        color: #FFD1E3;
+    }
+
+
+</style>
+
