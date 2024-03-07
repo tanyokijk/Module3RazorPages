@@ -3,7 +3,8 @@ using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<IDataService<Movie>>(provider =>
+
+builder.Services.AddSingleton<IDataService<Movie>>(provider =>
     new DataService<Movie>(SeedData.GetInitialMovies()));
 
 var app = builder.Build();
@@ -24,6 +25,7 @@ else
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
+
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();

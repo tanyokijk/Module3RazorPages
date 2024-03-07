@@ -18,6 +18,7 @@ public class DetailsModel : PageModel
 
     public void OnGet(int id)
     {
-        Movie = _movieService.GetById(id);
+        if (id != null)
+            Movie = _movieService.GetById(id);
     }
 }

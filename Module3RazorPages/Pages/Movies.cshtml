@@ -1,23 +1,47 @@
 ﻿@page "/"
 @model Module3RazorPages.Pages.MoviesModel
 
+
+    <form method="get" class="search-form">
+        <input type="text" id="searchQuery" name="text" placeholder="Шукати фільм" />
+        <button type="submit" class="search-button"></button>
+    </form>
+
+
+<a href="/" class="crud">Всі фільми</a>
+<a href="AddMovie" class="crud">Додати</a>
+<a href="UpdateMovie" class="crud">Редагувати</a>
+<a href="DeleteMovie" class="crud">Видалити</a>
+
+@if (!string.IsNullOrEmpty(TempData["Message"]?.ToString()))
+{
+    <p>@TempData["Message"]</p>
+}
+
 <div class="gallery">
     @foreach (var movie in Model.Movies)
     {
         <div class="movie-card">
-            <a href="Details/@movie.Id"><img src="@movie.Photo" alt="@movie.Name" class="movie-poster" /></a>
+            @if (!string.IsNullOrEmpty(movie.Photo))
+            {
+                <a href="Details/@movie.Id"><img src="@movie.Photo" alt="@movie.Name" class="movie-poster" /></a>
+            }
             <div class="movie-details">
                 <a href="Details/@movie.Id"><h2>@movie.Name</h2></a>
                 <h4>Сеанси:</h4>
 
+                @if (movie.Sessions != null)
+                {
                     @foreach (var session in movie.Sessions)
                     {
                         <div class="session-details"><p>@session.DateTime.ToString("HH:mm")</p><p>Зал @session.RoomNumber</p></div>
                     }
+                }
             </div>
         </div>
     }
 </div>
+
 
 <style>
     body
@@ -85,6 +109,63 @@ color : whitesmoke
         color: #FFD1E3;
     }
 
+    .search-form {
+        position: relative;
+        width: 300px;
+        margin: 0 auto;
+    }
+         input,  button {
+            outline: none;
+            background: transparent;
+        }
+
+         input {
+            width: 100%;
+            height: 42px;
+            padding-left: 15px;
+            border: 3px solid #F9F0DA;
+            color : whitesmoke;
+        }
+
+    .search-button {
+            border: none;
+            height: 42px;
+            width: 42px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+
+        .search-button:before {
+                content: "🔍";
+                font-size: 16px;
+                color: black;
+            }
+
+         input:focus {
+            border-color: #311c24
+        }
+
+
+
+    .crud {
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        top: 10px;
+        cursor: pointer;
+        font-size: 25px;
+        color: whitesmoke;
+        border: 3px solid #F9F0DA;
+        text-align: center;
+        position: relative;
+        margin: 0 auto;
+        padding-right: 160px; /* Розширюємо правий край форми, щоб уникнути накладання кнопки */
+        margin-bottom: 60px;
+        text-align: center;
+        margin: 0 auto;
+    }
 
 </style>
 

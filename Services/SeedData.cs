@@ -8,6 +8,25 @@ namespace Services;
 
 public static class SeedData
 {
+    public static List<Style> GetInitialStyles()
+    {
+        var adventures = new Style { Name = "пригоди" };
+        var animation = new Style { Name = "анімація" };
+        var comedy = new Style { Name = "комедія" };
+        var romance = new Style { Name = "романтика" };
+        var drama = new Style { Name = "драма" };
+        var family = new Style { Name = "сімейний" };
+        var thriller = new Style { Name = "трилер" };
+        var action = new Style { Name = "екшн" };
+        var biopic = new Style { Name = "байопік" };
+        var historical = new Style { Name = "історичний" };
+        var detective = new Style { Name = "детектив" };
+        var biography = new Style { Name = "біографія" };
+        var sports = new Style { Name = "спортивний" };
+        var mysticism = new Style { Name = "містика" };
+        var horror = new Style { Name = "горор" };
+        return new List<Style> { adventures, animation, comedy, romance, drama, family, thriller, action, biopic, historical, detective, biography, sports, mysticism, horror };
+    }
     public static List<Movie> GetInitialMovies()
     {
         var adventures = new Style { Name = "пригоди" };
